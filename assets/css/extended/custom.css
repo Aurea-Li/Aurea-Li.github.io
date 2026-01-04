@@ -1,0 +1,43 @@
+.post-list {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.post-item {
+  --marker-gap: 0.5rem;
+  --marker-size: 1em;
+}
+
+.post-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--marker-gap);
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.post-marker {
+  width: var(--marker-size);
+  font-size: var(--marker-size);
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transform: translateY(-0.08em);
+}
+
+.post-title {
+  font-size: 0.95rem;
+  line-height: 1;
+  font-weight: 600;
+}
+
+.post-desc {
+  margin-left: calc(var(--marker-size) + var(--marker-gap));
+  margin-top: 0.1rem;
+  font-size: 0.95rem;
+  color: var(--secondary);
+}

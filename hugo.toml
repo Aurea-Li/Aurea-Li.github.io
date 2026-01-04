@@ -1,0 +1,19 @@
+baseURL = "https://aurea-li.github.io/"
+languageCode = "en-us"
+title = "Milky's Pictures"
+theme = "PaperMod"
+
+[params]
+  defaultTheme = "light"
+  ShowReadingTime = false
+  ShowPostNavLinks = false
+  ShowBreadCrumbs = false
+  ShowCodeCopyButtons = false
+  ShowToc = false
+  mainSections = ["posts"]
+  disableSpecial1stPost = true
+  hideSummary = true
+
+[params.homeInfoParams]
+  Title = ""
+  Content = ""

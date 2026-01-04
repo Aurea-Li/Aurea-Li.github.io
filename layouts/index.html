@@ -1,0 +1,21 @@
+{{ define "main" }}
+<main class="main home">
+
+  <ul class="post-list">
+    {{ range (where site.RegularPages "Section" "in" site.Params.mainSections) }}
+      <li class="post-item">
+        <a class="post-link" href="{{ .RelPermalink }}">
+          <span class="post-marker" aria-hidden="true">
+            {{ .Params.emoji | default "" }}
+          </span>
+          <span class="post-title">{{ .Title }}</span>
+        </a>
+
+        {{ with .Params.description }}
+          <div class="post-desc">{{ . }}</div>
+        {{ end }}
+      </li>
+    {{ end }}
+  </ul>
+</main>
+{{ end }}
