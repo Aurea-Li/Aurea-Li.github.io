@@ -1,0 +1,23 @@
+{{- $matches := findRE "!\\[([^\\]]*)\\]\\(([^)\\s]+)(?:\\s+\"[^\"]*\")?\\)" .Inner -}}
+{{- if lt (len $matches) 2 -}}
+  {{- errorf "two_up shortcode requires two markdown images" -}}
+{{- end -}}
+{{- $alt1 := replaceRE "^!\\[([^\\]]*)\\]\\(([^)\\s]+).*\\)$" "$1" (index $matches 0) -}}
+{{- $alt2 := replaceRE "^!\\[([^\\]]*)\\]\\(([^)\\s]+).*\\)$" "$1" (index $matches 1) -}}
+{{- $src1 := replaceRE "^!\\[([^\\]]*)\\]\\(([^)\\s]+).*\\)$" "$2" (index $matches 0) -}}
+{{- $src2 := replaceRE "^!\\[([^\\]]*)\\]\\(([^)\\s]+).*\\)$" "$2" (index $matches 1) -}}
+{{- $path1 := $src1 -}}
+{{- if strings.HasPrefix $path1 "/" -}}
+  {{- $path1 = printf "static%s" $path1 -}}
+{{- end -}}
+{{- $path2 := $src2 -}}
+{{- if strings.HasPrefix $path2 "/" -}}
+  {{- $path2 = printf "static%s" $path2 -}}
+{{- end -}}
+{{- $img1 := imageConfig $path1 -}}
+{{- $img2 := imageConfig $path2 -}}
+{{- $ratio1 := div (mul $img1.Width 1.0) $img1.Height -}}
+{{- $ratio2 := div (mul $img2.Width 1.0) $img2.Height -}}
+<div class="two-up" style="--ratio-1: {{ $ratio1 }}; --ratio-2: {{ $ratio2 }};">
+  <figure class="two-up__item"><img src="{{ $src1 }}" alt="{{ $alt1 | htmlEscape }}" loading="lazy"></figure><figure class="two-up__item"><img src="{{ $src2 }}" alt="{{ $alt2 | htmlEscape }}" loading="lazy"></figure>
+</div>

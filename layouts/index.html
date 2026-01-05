@@ -9,6 +9,9 @@
             {{ .Params.emoji | default "" }}
           </span>
           <span class="post-title">{{ .Title }}</span>
+          <span class="post-date-inline" datetime="{{ .Date.Format "2006-01-02" }}">
+            {{ .Date | time.Format "January 2, 2006" }}
+          </span>
         </a>
 
         {{ with .Params.description }}

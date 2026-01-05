@@ -1,3 +1,27 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap");
+
+:root {
+  --font-heading: "Manrope", "Noto Sans", sans-serif;
+  --font-body: "Manrope", "Noto Sans", sans-serif;
+}
+
+body {
+  font-family: var(--font-body);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.logo a,
+.post-title,
+.post-title a {
+  font-family: var(--font-heading);
+  font-weight: 400;
+}
+
 .post-list {
   list-style: none;
   padding-left: 0;
@@ -11,7 +35,7 @@
 
 .post-link {
   display: inline-flex;
-  align-items: center;
+  align-items: baseline;
   gap: var(--marker-gap);
   font-size: 0.95rem;
   font-weight: 600;
@@ -40,4 +64,77 @@
   margin-top: 0.1rem;
   font-size: 0.95rem;
   color: var(--secondary);
+}
+
+.post-date-inline {
+  font-size: inherit;
+  color: var(--secondary);
+  font-weight: 400;
+  line-height: inherit;
+}
+
+.post-date-inline::before {
+  content: "·";
+  margin: 0 0.4rem;
+  color: var(--secondary);
+}
+
+/* Single post header: title larger than description */
+.post-header .post-title {
+  font-size: 2.2rem;
+}
+
+.post-header .post-description {
+  font-size: 1.05rem;
+}
+
+@media (min-width: 900px) {
+  :root {
+    --main-width: 960px;
+    --nav-width: 1100px;
+    --gap: 18px;
+  }
+}
+
+/* Two images side-by-side without cropping */
+.post-content .two-up {
+  --two-up-gap: 0.8rem;
+  display: flex;
+  gap: var(--two-up-gap);
+  align-items: stretch;
+  margin: 1rem 0;
+}
+
+.post-content .two-up > p {
+  margin: 0;
+}
+
+.post-content .two-up__item {
+  margin: 0;
+  flex: 1 1 0;
+}
+
+.post-content .two-up__item:nth-child(1) {
+  flex-grow: var(--ratio-1, 1);
+}
+
+.post-content .two-up__item:nth-child(2) {
+  flex-grow: var(--ratio-2, 1);
+}
+
+.post-content .two-up img {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin: 0;
+}
+
+@media (max-width: 680px) {
+  .post-content .two-up {
+    flex-direction: column;
+  }
+
+  .post-content .two-up img {
+    width: 100%;
+  }
 }
