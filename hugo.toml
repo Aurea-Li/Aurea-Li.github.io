@@ -17,3 +17,7 @@ theme = "PaperMod"
 [params.homeInfoParams]
   Title = ""
   Content = ""
+
+[caches]
+  [caches.images]
+    dir = ':cacheDir/images'
