@@ -80,6 +80,7 @@ jobs:
       - name: Build the site
         run: |
           hugo \
+            --cleanDestinationDir \
             --gc \
             --minify \
             --baseURL "${{ steps.pages.outputs.base_url }}/" \

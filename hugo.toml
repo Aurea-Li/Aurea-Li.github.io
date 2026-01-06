@@ -3,6 +3,8 @@ languageCode = "en-us"
 title = "Milky's Pictures"
 theme = "PaperMod"
 
+[taxonomies]
+
 [params]
   defaultTheme = "light"
   ShowReadingTime = false
