@@ -5,16 +5,8 @@
 {{- end -}}
 {{- $alt1 := .Get "alt1" | default "" -}}
 {{- $alt2 := .Get "alt2" | default "" -}}
-{{- $img1 := .Page.Resources.GetMatch $src1 -}}
-{{- if not $img1 -}}
-  {{- errorf "two_up could not find page resource: %s" $src1 -}}
-{{- end -}}
-{{- $img2 := .Page.Resources.GetMatch $src2 -}}
-{{- if not $img2 -}}
-  {{- errorf "two_up could not find page resource: %s" $src2 -}}
-{{- end -}}
-{{- $ratio1 := div (mul $img1.Width 1.0) $img1.Height -}}
-{{- $ratio2 := div (mul $img2.Width 1.0) $img2.Height -}}
+{{- $ratio1 := .Get "ratio1" | default 1 -}}
+{{- $ratio2 := .Get "ratio2" | default 1 -}}
 <div class="two-up" style="--ratio-1: {{ $ratio1 }}; --ratio-2: {{ $ratio2 }};">
-  <figure class="two-up__item"><img src="{{ $img1.RelPermalink }}" alt="{{ $alt1 | htmlEscape }}" loading="lazy"></figure><figure class="two-up__item"><img src="{{ $img2.RelPermalink }}" alt="{{ $alt2 | htmlEscape }}" loading="lazy"></figure>
+  <figure class="two-up__item"><img src="{{ $src1 | safeURL }}" alt="{{ $alt1 | htmlEscape }}" loading="lazy"></figure><figure class="two-up__item"><img src="{{ $src2 | safeURL }}" alt="{{ $alt2 | htmlEscape }}" loading="lazy"></figure>
 </div>
