@@ -1,0 +1,64 @@
+<script>
+(() => {
+  const selector = '.post-content img';
+  const ignoredSelector = '.no-lightbox';
+  const overlay = document.createElement('div');
+  overlay.className = 'image-lightbox';
+  overlay.setAttribute('aria-hidden', 'true');
+  overlay.innerHTML = '<img class="image-lightbox__img" alt="">';
+  document.body.appendChild(overlay);
+
+  const overlayImg = overlay.querySelector('.image-lightbox__img');
+  let closeTimer;
+
+  const close = () => {
+    overlay.classList.remove('is-open');
+    overlay.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('lightbox-open');
+    if (closeTimer) {
+      window.clearTimeout(closeTimer);
+    }
+    closeTimer = window.setTimeout(() => {
+      overlayImg.src = '';
+      overlayImg.alt = '';
+    }, 240);
+  };
+
+  const open = (src, alt) => {
+    if (closeTimer) {
+      window.clearTimeout(closeTimer);
+    }
+    overlayImg.src = src;
+    overlayImg.alt = alt || '';
+    overlay.classList.add('is-open');
+    overlay.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('lightbox-open');
+  };
+
+  overlay.addEventListener('click', () => {
+    close();
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (overlay.classList.contains('is-open') && event.key === 'Escape') {
+      close();
+    }
+  });
+
+  document.addEventListener('click', (event) => {
+    const img = event.target.closest(selector);
+    if (!img) {
+      return;
+    }
+    if (img.matches(ignoredSelector) || img.closest('a')) {
+      return;
+    }
+    if (overlay.contains(img)) {
+      return;
+    }
+    event.preventDefault();
+    const src = img.getAttribute('data-zoom-src') || img.currentSrc || img.src;
+    open(src, img.alt);
+  });
+})();
+</script>
