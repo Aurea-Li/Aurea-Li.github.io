@@ -1,6 +1,6 @@
 baseURL = "https://aurea-li.github.io/"
 languageCode = "en-us"
-title = "Digital Garden"
+title = "Sheep Garden"
 theme = "PaperMod"
 
 [taxonomies]
