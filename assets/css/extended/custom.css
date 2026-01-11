@@ -191,6 +191,19 @@ body.lightbox-open {
   overflow: hidden;
 }
 
+.post-content blockquote.subtle-quote {
+  font-size: 0.95rem;
+  color: #7a7a7a;
+  margin: 1rem 0;
+  padding-left: 0.75rem;
+  border-left: 4px solid #a1a1a1;
+}
+
+.post-content blockquote.subtle-quote p {
+  margin: 0;
+  font-style: italic;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .image-lightbox,
   .image-lightbox__img {
