@@ -3,7 +3,7 @@ title: "Cozy Winter Portraits"
 date: 2026-01-04
 draft: false
 emoji: "🎄"
-description: "Short days and nights spent at home."
+description: "Short days and nights spent at home"
 ---
 
 These past two weeks were a blur. One of my goals over winter break was to spin up a photography blog where I can share my pictures and add some thoughts. I recently acquired a film camera; all these photos are taken on film. The b&w is on HP5 and the color is on Fujifilm 400.
