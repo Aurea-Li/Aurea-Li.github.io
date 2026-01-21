@@ -9,6 +9,8 @@
   document.body.appendChild(overlay);
 
   const overlayImg = overlay.querySelector('.image-lightbox__img');
+  let activeImages = [];
+  let activeIndex = -1;
   let closeTimer;
 
   const close = () => {
@@ -24,12 +26,35 @@
     }, 240);
   };
 
-  const open = (src, alt) => {
+  const getLightboxImages = () => Array.from(document.querySelectorAll(selector))
+    .filter((img) => !img.matches(ignoredSelector) && !img.closest('a'));
+
+  const getImageSrc = (img) => img.getAttribute('data-zoom-src') || img.currentSrc || img.src;
+
+  const showAtIndex = (index) => {
+    if (!activeImages.length) {
+      return;
+    }
+    activeIndex = (index + activeImages.length) % activeImages.length;
+    const img = activeImages[activeIndex];
+    overlayImg.src = getImageSrc(img);
+    overlayImg.alt = img.alt || '';
+  };
+
+  const open = (img) => {
     if (closeTimer) {
       window.clearTimeout(closeTimer);
     }
-    overlayImg.src = src;
-    overlayImg.alt = alt || '';
+    activeImages = getLightboxImages();
+    activeIndex = activeImages.indexOf(img);
+    if (activeIndex === -1) {
+      activeImages = [];
+      activeIndex = -1;
+      overlayImg.src = getImageSrc(img);
+      overlayImg.alt = img.alt || '';
+    } else {
+      showAtIndex(activeIndex);
+    }
     overlay.classList.add('is-open');
     overlay.setAttribute('aria-hidden', 'false');
     document.body.classList.add('lightbox-open');
@@ -40,8 +65,21 @@
   });
 
   document.addEventListener('keydown', (event) => {
-    if (overlay.classList.contains('is-open') && event.key === 'Escape') {
+    if (!overlay.classList.contains('is-open')) {
+      return;
+    }
+    if (event.key === 'Escape') {
       close();
+      return;
+    }
+    if (event.key === 'ArrowRight') {
+      event.preventDefault();
+      showAtIndex(activeIndex + 1);
+      return;
+    }
+    if (event.key === 'ArrowLeft') {
+      event.preventDefault();
+      showAtIndex(activeIndex - 1);
     }
   });
 
@@ -57,8 +95,7 @@
       return;
     }
     event.preventDefault();
-    const src = img.getAttribute('data-zoom-src') || img.currentSrc || img.src;
-    open(src, img.alt);
+    open(img);
   });
 })();
 </script>
