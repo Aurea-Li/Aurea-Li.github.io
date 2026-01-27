@@ -199,6 +199,30 @@ body.lightbox-open {
   border-left: 4px solid #a1a1a1;
 }
 
+.post-content .text-image-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: 1.5rem;
+  align-items: start;
+  margin: 1.5rem 0;
+}
+
+.post-content .text-image-row__text {
+  min-width: 0;
+}
+
+.post-content .text-image-row__media img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+@media (max-width: 720px) {
+  .post-content .text-image-row {
+    grid-template-columns: 1fr;
+  }
+}
+
 .post-content blockquote.subtle-quote p {
   margin: 0;
   font-style: italic;
