@@ -1,0 +1,18 @@
+<ul class="post-list">
+  {{ range .pages }}
+    <li class="post-item">
+      <a class="post-link" href="{{ .RelPermalink }}">
+        <span class="post-marker" aria-hidden="true">
+          {{ .Params.emoji | default "" }}
+        </span>
+        <span class="post-title">{{ .Title }}</span>
+        <span class="post-date-inline" datetime="{{ .Date.Format "2006-01-02" }}">
+          {{ .Date | time.Format "January 2, 2006" }}
+        </span>
+      </a>
+      {{ with .Params.description }}
+        <div class="post-desc">{{ . }}</div>
+      {{ end }}
+    </li>
+  {{ end }}
+</ul>

@@ -1,0 +1,22 @@
+{{- $dest := .Destination | safeURL -}}
+{{- $alt := .Text | htmlEscape -}}
+{{- $title := .Title -}}
+{{- $attrs := .Attributes -}}
+{{- $count := .Page.Scratch.Get "imageCount" | default 0 -}}
+{{- $isEager := lt $count 2 -}}
+{{- .Page.Scratch.Set "imageCount" (add $count 1) -}}
+{{- $loading := "lazy" -}}
+{{- $fetchpriority := "auto" -}}
+{{- if $isEager -}}
+  {{- $loading = "eager" -}}
+  {{- $fetchpriority = "high" -}}
+{{- end -}}
+<img src="{{ $dest }}"
+  alt="{{ $alt }}"
+  loading="{{ $loading }}"
+  decoding="async"
+  fetchpriority="{{ $fetchpriority }}"
+  {{- with $attrs.width }} width="{{ . }}"{{ end -}}
+  {{- with $attrs.height }} height="{{ . }}"{{ end -}}
+  {{- with $title }} title="{{ . | htmlEscape }}"{{ end -}}
+>
