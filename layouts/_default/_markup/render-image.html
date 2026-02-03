@@ -2,6 +2,29 @@
 {{- $alt := .Text | htmlEscape -}}
 {{- $title := .Title -}}
 {{- $attrs := .Attributes -}}
+{{- $width := "" -}}
+{{- $height := "" -}}
+{{- if $attrs.width -}}
+  {{- $width = $attrs.width -}}
+{{- end -}}
+{{- if $attrs.height -}}
+  {{- $height = $attrs.height -}}
+{{- end -}}
+{{- $titleAttr := $title -}}
+{{- if and $title (or (not $width) (not $height)) -}}
+  {{- $stripped := $title | replaceRE `(?i)width|height|[0-9=\\s]` "" -}}
+  {{- if eq $stripped "" -}}
+    {{- $wMatch := findRE `(?i)width\\s*=\\s*([0-9]+)` $title -}}
+    {{- if gt (len $wMatch) 0 -}}
+      {{- $width = replaceRE `(?i).*width\\s*=\\s*([0-9]+).*` `$1` $title -}}
+    {{- end -}}
+    {{- $hMatch := findRE `(?i)height\\s*=\\s*([0-9]+)` $title -}}
+    {{- if gt (len $hMatch) 0 -}}
+      {{- $height = replaceRE `(?i).*height\\s*=\\s*([0-9]+).*` `$1` $title -}}
+    {{- end -}}
+    {{- $titleAttr = "" -}}
+  {{- end -}}
+{{- end -}}
 {{- $count := .Page.Scratch.Get "imageCount" | default 0 -}}
 {{- $isEager := lt $count 2 -}}
 {{- .Page.Scratch.Set "imageCount" (add $count 1) -}}
@@ -13,10 +36,11 @@
 {{- end -}}
 <img src="{{ $dest }}"
   alt="{{ $alt }}"
+  class="post-image"
   loading="{{ $loading }}"
   decoding="async"
   fetchpriority="{{ $fetchpriority }}"
-  {{- with $attrs.width }} width="{{ . }}"{{ end -}}
-  {{- with $attrs.height }} height="{{ . }}"{{ end -}}
-  {{- with $title }} title="{{ . | htmlEscape }}"{{ end -}}
+  {{- with $width }} width="{{ . }}"{{ end -}}
+  {{- with $height }} height="{{ . }}"{{ end -}}
+  {{- with $titleAttr }} title="{{ . | htmlEscape }}"{{ end -}}
 >

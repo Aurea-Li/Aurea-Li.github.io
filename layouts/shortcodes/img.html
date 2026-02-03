@@ -1,0 +1,23 @@
+{{- $src := .Get "src" -}}
+{{- if not $src -}}
+  {{- errorf "img shortcode requires src param" -}}
+{{- end -}}
+{{- $alt := .Get "alt" | default "" -}}
+{{- $title := .Get "title" -}}
+{{- $width := .Get "width" -}}
+{{- $height := .Get "height" -}}
+{{- $loading := .Get "loading" | default "lazy" -}}
+{{- $decoding := .Get "decoding" | default "async" -}}
+{{- $class := "img-shortcode" -}}
+{{- with .Get "class" -}}
+  {{- $class = printf "%s %s" $class . -}}
+{{- end -}}
+<img src="{{ $src | safeURL }}"
+  alt="{{ $alt | htmlEscape }}"
+  class="{{ $class }}"
+  loading="{{ $loading }}"
+  decoding="{{ $decoding }}"
+  {{- with $width }} width="{{ . }}"{{ end -}}
+  {{- with $height }} height="{{ . }}"{{ end -}}
+  {{- with $title }} title="{{ . | htmlEscape }}"{{ end -}}
+>

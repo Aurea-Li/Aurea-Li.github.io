@@ -6,32 +6,32 @@ emoji: "⛷️"
 description: "The world offers itself to your imagination"
 --- 
 
-![Morning Fog](https://github.com/Aurea-Li/image-store-2026/blob/main/2026-01-18-winter-activities/L1002200.jpg?raw=true)
+{{< img src="https://github.com/Aurea-Li/image-store-2026/blob/main/2026-01-18-winter-activities/L1002200.jpg?raw=true" alt="Morning Fog" >}}
 
-![Morning Fog pt. 2](https://github.com/Aurea-Li/image-store-2026/blob/main/2026-01-18-winter-activities/L1002204.jpg?raw=true)
+{{< img src="https://github.com/Aurea-Li/image-store-2026/blob/main/2026-01-18-winter-activities/L1002204.jpg?raw=true" alt="Morning Fog pt. 2" >}}
 
 
-![Walking at Seward Park](https://github.com/Aurea-Li/image-store-2026/blob/main/2026-01-18-winter-activities/IMG_1780.jpg?raw=true)
+{{< img src="https://github.com/Aurea-Li/image-store-2026/blob/main/2026-01-18-winter-activities/IMG_1780.jpg?raw=true" alt="Walking at Seward Park" >}}
 
-![Rainier at Seward Park](https://github.com/Aurea-Li/image-store-2026/blob/main/2026-01-18-winter-activities/IMG_1781.jpg?raw=true)
+{{< img src="https://github.com/Aurea-Li/image-store-2026/blob/main/2026-01-18-winter-activities/IMG_1781.jpg?raw=true" alt="Rainier at Seward Park" >}}
 
-![Sun through the trees](https://github.com/Aurea-Li/image-store-2026/blob/main/2026-01-18-winter-activities/IMG_1800.jpg?raw=true)
+{{< img src="https://github.com/Aurea-Li/image-store-2026/blob/main/2026-01-18-winter-activities/IMG_1800.jpg?raw=true" alt="Sun through the trees" >}}
 
-![Dog and Docks](https://github.com/Aurea-Li/image-store-2026/blob/main/2026-01-18-winter-activities/IMG_1801.jpg?raw=true)
+{{< img src="https://github.com/Aurea-Li/image-store-2026/blob/main/2026-01-18-winter-activities/IMG_1801.jpg?raw=true" alt="Dog and Docks" >}}
 
-![House](https://github.com/Aurea-Li/image-store-2026/blob/main/2026-01-18-winter-activities/IMG_1799.jpg?raw=true)
+{{< img src="https://github.com/Aurea-Li/image-store-2026/blob/main/2026-01-18-winter-activities/IMG_1799.jpg?raw=true" alt="House" >}}
 
-![I90 to Snoqualmie](https://github.com/Aurea-Li/image-store-2026/blob/main/2026-01-18-winter-activities/IMG_1798.jpg?raw=true)
+{{< img src="https://github.com/Aurea-Li/image-store-2026/blob/main/2026-01-18-winter-activities/IMG_1798.jpg?raw=true" alt="I90 to Snoqualmie" >}}
 
-![I90 to Snoqualmie v2](https://github.com/Aurea-Li/image-store-2026/blob/main/2026-01-18-winter-activities/IMG_1796.jpg?raw=true)
+{{< img src="https://github.com/Aurea-Li/image-store-2026/blob/main/2026-01-18-winter-activities/IMG_1796.jpg?raw=true" alt="I90 to Snoqualmie v2" >}}
 
-![Snoqualmie Road](https://github.com/Aurea-Li/image-store-2026/blob/main/2026-01-18-winter-activities/IMG_1793.jpg?raw=true)
+{{< img src="https://github.com/Aurea-Li/image-store-2026/blob/main/2026-01-18-winter-activities/IMG_1793.jpg?raw=true" alt="Snoqualmie Road" >}}
 
 {{< two_up src1="https://github.com/Aurea-Li/image-store-2026/blob/main/2026-01-18-winter-activities/IMG_1804.jpg?raw=true" alt1="X Snowshoeing" src2="https://github.com/Aurea-Li/image-store-2026/blob/main/2026-01-18-winter-activities/untitled-1.jpg?raw=true" alt2="X playing Dominion" ratio1="1.5" ratio2="0.667" >}}
 
-![Magic Carpet](https://github.com/Aurea-Li/image-store-2026/blob/main/2026-01-18-winter-activities/IMG_1787.jpg?raw=true)
+{{< img src="https://github.com/Aurea-Li/image-store-2026/blob/main/2026-01-18-winter-activities/IMG_1787.jpg?raw=true" alt="Magic Carpet" >}}
 
-![Skiing](https://github.com/Aurea-Li/image-store-2026/blob/main/2026-01-18-winter-activities/IMG_1785.jpg?raw=true)
+{{< img src="https://github.com/Aurea-Li/image-store-2026/blob/main/2026-01-18-winter-activities/IMG_1785.jpg?raw=true" alt="Skiing" >}}
 
 
 

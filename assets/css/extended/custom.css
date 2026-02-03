@@ -3,6 +3,7 @@
 :root {
   --font-heading: "Manrope", "Noto Sans", sans-serif;
   --font-body: "Manrope", "Noto Sans", sans-serif;
+  --image-bleed: clamp(0px, 4vw, 80px);
 }
 
 body {
@@ -103,6 +104,10 @@ h6,
   gap: var(--two-up-gap);
   align-items: stretch;
   margin: 1rem 0;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(calc(100% + (2 * var(--image-bleed))), calc(100vw - (2 * var(--gap))));
 }
 
 .post-content .two-up > p {
@@ -127,6 +132,17 @@ h6,
   height: auto;
   display: block;
   margin: 0;
+}
+
+.post-content img.img-shortcode,
+.post-content img.post-image {
+  display: block;
+  height: auto;
+  max-width: none;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(calc(100% + (2 * var(--image-bleed))), calc(100vw - (2 * var(--gap))));
 }
 
 @media (max-width: 680px) {
