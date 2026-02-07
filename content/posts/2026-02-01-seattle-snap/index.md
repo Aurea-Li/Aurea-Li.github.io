@@ -2,7 +2,7 @@
 title: "Seattle Snap"
 date: 2026-02-01
 draft: false
-emoji: "👠"
+emoji: "📸"
 description: "The hobby photographer meets other models and photographers"
 ---
 
