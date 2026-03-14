@@ -1,3 +1,9 @@
+{{- $attribution := .Get "attribution" -}}
 <blockquote class="subtle-quote">
   {{ .Inner | markdownify }}
+  {{- with $attribution }}
+    <footer class="subtle-quote__footer">
+      <cite>{{ . | htmlEscape }}</cite>
+    </footer>
+  {{- end }}
 </blockquote>

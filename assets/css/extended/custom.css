@@ -244,6 +244,17 @@ body.lightbox-open {
   font-style: italic;
 }
 
+.post-content .subtle-quote__footer {
+  margin-top: 0.4rem;
+  font-size: 0.85rem;
+  font-style: italic;
+  color: var(--secondary);
+}
+
+.post-content .subtle-quote__footer cite {
+  font-style: inherit;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .image-lightbox,
   .image-lightbox__img {
