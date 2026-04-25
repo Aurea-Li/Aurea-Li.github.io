@@ -21,7 +21,7 @@ I spent most of my time in south Brooklyn, since that's where X's family lives.
 {{< img src="https://raw.githubusercontent.com/Aurea-Li/image-store-2026/main/2026-04-23-NYC/IMG_2149.jpg" alt="Brooklyn Street" >}}
 
 
-I went on a mini adventure to try and visit Columbia University. I took the subway all the way there (from south brooklyn!!!). Turns out they closed their campus to outsiders due to the protests a while back. Why does it feel like everything is a death by a thousand cuts? Public instutitions and amenities, employers, rising costs, society at large... anyways don't mean to go on a tangent. 
+I went on a mini adventure to try and visit Columbia University. I took the subway all the way there (from south Brooklyn!!!). Turns out they closed their campus to outsiders due to the protests a while back. Why does it feel like everything is a death by a thousand cuts? Public instutitions and amenities, employers, rising costs, society at large... anyways didn't mean to go on a tangent. 
 
 {{< two_up src1="https://raw.githubusercontent.com/Aurea-Li/image-store-2026/main/2026-04-23-NYC/IMG_2158.jpg" alt1="Manhattan buildings" src2="https://raw.githubusercontent.com/Aurea-Li/image-store-2026/main/2026-04-23-NYC/untitled-1.jpg" alt2="Manhattan buildings 2" ratio1="1.5" ratio2="0.667" >}}
 
@@ -30,7 +30,6 @@ But it gave me a good opportunity to explore northern Manhattan which I haven't 
 {{< img src="https://raw.githubusercontent.com/Aurea-Li/image-store-2026/main/2026-04-23-NYC/IMG_2171.jpg" alt="Seinfield Restaurant" >}}
 
 We took a nice walk around a park near Columbia which is where I took this portrait.
-
 
 {{< img src="https://raw.githubusercontent.com/Aurea-Li/image-store-2026/main/2026-04-23-NYC/IMG_2170.jpg" alt="Portrait of X" >}}
 
