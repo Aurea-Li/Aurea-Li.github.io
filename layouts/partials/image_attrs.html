@@ -1,0 +1,56 @@
+{{- $page := .page -}}
+{{- $src := .src | default "" -}}
+{{- $width := .width | default "" -}}
+{{- $height := .height | default "" -}}
+{{- $loading := .loading | default "" -}}
+{{- $fetchpriority := .fetchpriority | default "" -}}
+{{- $decoding := .decoding | default "async" -}}
+
+{{- if and $src (or (not $width) (not $height)) -}}
+  {{- $isRemote := or (hasPrefix $src "https://") (hasPrefix $src "http://") -}}
+  {{- $resource := "" -}}
+  {{- if $isRemote -}}
+    {{- $resourceSrc := replace $src " " "%20" -}}
+    {{- with try (resources.GetRemote $resourceSrc) -}}
+      {{- with .Value -}}
+        {{- $resource = . -}}
+      {{- end -}}
+    {{- end -}}
+  {{- else if $page -}}
+    {{- with $page.Resources.GetMatch $src -}}
+      {{- $resource = . -}}
+    {{- else -}}
+      {{- with resources.Get $src -}}
+        {{- $resource = . -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+
+  {{- with $resource -}}
+    {{- if not $width -}}
+      {{- $width = .Width -}}
+    {{- end -}}
+    {{- if not $height -}}
+      {{- $height = .Height -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $count := $page.Scratch.Get "imageCount" | default 0 -}}
+{{- $isEager := lt $count 2 -}}
+{{- $page.Scratch.Set "imageCount" (add $count 1) -}}
+
+{{- if not $loading -}}
+  {{- $loading = cond $isEager "eager" "lazy" -}}
+{{- end -}}
+{{- if not $fetchpriority -}}
+  {{- $fetchpriority = cond $isEager "high" "auto" -}}
+{{- end -}}
+
+{{- return (dict
+  "width" $width
+  "height" $height
+  "loading" $loading
+  "fetchpriority" $fetchpriority
+  "decoding" $decoding
+) -}}

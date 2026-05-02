@@ -4,10 +4,15 @@
 {{- end -}}
 {{- $alt := .Get "alt" | default "" -}}
 {{- $title := .Get "title" -}}
-{{- $width := .Get "width" -}}
-{{- $height := .Get "height" -}}
-{{- $loading := .Get "loading" | default "lazy" -}}
-{{- $decoding := .Get "decoding" | default "async" -}}
+{{- $attrs := partial "image_attrs.html" (dict
+  "page" .Page
+  "src" $src
+  "width" (.Get "width")
+  "height" (.Get "height")
+  "loading" (.Get "loading")
+  "fetchpriority" (.Get "fetchpriority")
+  "decoding" (.Get "decoding")
+) -}}
 {{- $class := "img-shortcode" -}}
 {{- with .Get "class" -}}
   {{- $class = printf "%s %s" $class . -}}
@@ -15,9 +20,10 @@
 <img src="{{ $src | safeURL }}"
   alt="{{ $alt | htmlEscape }}"
   class="{{ $class }}"
-  loading="{{ $loading }}"
-  decoding="{{ $decoding }}"
-  {{- with $width }} width="{{ . }}"{{ end -}}
-  {{- with $height }} height="{{ . }}"{{ end -}}
+  loading="{{ $attrs.loading }}"
+  decoding="{{ $attrs.decoding }}"
+  fetchpriority="{{ $attrs.fetchpriority }}"
+  {{- with $attrs.width }} width="{{ . }}"{{ end -}}
+  {{- with $attrs.height }} height="{{ . }}"{{ end -}}
   {{- with $title }} title="{{ . | htmlEscape }}"{{ end -}}
 >

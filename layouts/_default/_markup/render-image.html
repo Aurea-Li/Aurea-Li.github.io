@@ -1,4 +1,5 @@
-{{- $dest := .Destination | safeURL -}}
+{{- $src := .Destination -}}
+{{- $dest := $src | safeURL -}}
 {{- $alt := .Text | htmlEscape -}}
 {{- $title := .Title -}}
 {{- $attrs := .Attributes -}}
@@ -25,22 +26,19 @@
     {{- $titleAttr = "" -}}
   {{- end -}}
 {{- end -}}
-{{- $count := .Page.Scratch.Get "imageCount" | default 0 -}}
-{{- $isEager := lt $count 2 -}}
-{{- .Page.Scratch.Set "imageCount" (add $count 1) -}}
-{{- $loading := "lazy" -}}
-{{- $fetchpriority := "auto" -}}
-{{- if $isEager -}}
-  {{- $loading = "eager" -}}
-  {{- $fetchpriority = "high" -}}
-{{- end -}}
+{{- $imageAttrs := partial "image_attrs.html" (dict
+  "page" .Page
+  "src" $src
+  "width" $width
+  "height" $height
+) -}}
 <img src="{{ $dest }}"
   alt="{{ $alt }}"
   class="post-image"
-  loading="{{ $loading }}"
-  decoding="async"
-  fetchpriority="{{ $fetchpriority }}"
-  {{- with $width }} width="{{ . }}"{{ end -}}
-  {{- with $height }} height="{{ . }}"{{ end -}}
+  loading="{{ $imageAttrs.loading }}"
+  decoding="{{ $imageAttrs.decoding }}"
+  fetchpriority="{{ $imageAttrs.fetchpriority }}"
+  {{- with $imageAttrs.width }} width="{{ . }}"{{ end -}}
+  {{- with $imageAttrs.height }} height="{{ . }}"{{ end -}}
   {{- with $titleAttr }} title="{{ . | htmlEscape }}"{{ end -}}
 >

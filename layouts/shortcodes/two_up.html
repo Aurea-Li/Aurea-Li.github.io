@@ -5,27 +5,29 @@
 {{- end -}}
 {{- $alt1 := .Get "alt1" | default "" -}}
 {{- $alt2 := .Get "alt2" | default "" -}}
-{{- $width1 := .Get "width1" -}}
-{{- $height1 := .Get "height1" -}}
-{{- $width2 := .Get "width2" -}}
-{{- $height2 := .Get "height2" -}}
+{{- $attrs1 := partial "image_attrs.html" (dict "page" .Page "src" $src1 "width" (.Get "width1") "height" (.Get "height1")) -}}
+{{- $attrs2 := partial "image_attrs.html" (dict "page" .Page "src" $src2 "width" (.Get "width2") "height" (.Get "height2")) -}}
 {{- $ratio1 := .Get "ratio1" | default 1 -}}
 {{- $ratio2 := .Get "ratio2" | default 1 -}}
 <div class="two-up" style="--ratio-1: {{ $ratio1 }}; --ratio-2: {{ $ratio2 }};">
   <figure class="two-up__item">
     <img src="{{ $src1 | safeURL }}"
       alt="{{ $alt1 | htmlEscape }}"
-      loading="lazy"
-      {{- with $width1 }} width="{{ . }}"{{ end -}}
-      {{- with $height1 }} height="{{ . }}"{{ end -}}
+      loading="{{ $attrs1.loading }}"
+      decoding="{{ $attrs1.decoding }}"
+      fetchpriority="{{ $attrs1.fetchpriority }}"
+      {{- with $attrs1.width }} width="{{ . }}"{{ end -}}
+      {{- with $attrs1.height }} height="{{ . }}"{{ end -}}
     >
   </figure>
   <figure class="two-up__item">
     <img src="{{ $src2 | safeURL }}"
       alt="{{ $alt2 | htmlEscape }}"
-      loading="lazy"
-      {{- with $width2 }} width="{{ . }}"{{ end -}}
-      {{- with $height2 }} height="{{ . }}"{{ end -}}
+      loading="{{ $attrs2.loading }}"
+      decoding="{{ $attrs2.decoding }}"
+      fetchpriority="{{ $attrs2.fetchpriority }}"
+      {{- with $attrs2.width }} width="{{ . }}"{{ end -}}
+      {{- with $attrs2.height }} height="{{ . }}"{{ end -}}
     >
   </figure>
 </div>
