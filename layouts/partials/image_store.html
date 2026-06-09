@@ -1,0 +1,64 @@
+{{- $src := .src | default "" -}}
+{{- $zoom := .zoom | default "" -}}
+{{- $config := site.Params.imageStore | default dict -}}
+{{- $baseURL := $config.baseURL | default "https://raw.githubusercontent.com/Aurea-Li/image-store-2026/main/" -}}
+{{- $displayDir := $config.displayDir | default "display" -}}
+{{- $originalDir := $config.originalDir | default "" -}}
+{{- if and $baseURL (not (hasSuffix $baseURL "/")) -}}
+  {{- $baseURL = printf "%s/" $baseURL -}}
+{{- end -}}
+
+{{- $isHTTP := or (hasPrefix $src "https://") (hasPrefix $src "http://") -}}
+{{- $isStoreImage := or (not $isHTTP) (hasPrefix $src $baseURL) -}}
+{{- $displayURL := $src -}}
+{{- $zoomURL := $zoom | default $src -}}
+{{- $key := "" -}}
+{{- $width := "" -}}
+{{- $height := "" -}}
+
+{{- if and $src $isStoreImage -}}
+  {{- $path := $src -}}
+  {{- if hasPrefix $src $baseURL -}}
+    {{- $path = replace $src $baseURL "" -}}
+  {{- end -}}
+  {{- $path = $path | replaceRE `^/+` "" | replaceRE `/+` "/" -}}
+  {{- $key = $path | replaceRE `^(display|originals)/` "" -}}
+
+  {{- $displayPath := cond (hasPrefix $path (printf "%s/" $displayDir)) $path (printf "%s/%s" $displayDir $key) -}}
+  {{- $originalPath := $path -}}
+  {{- if hasPrefix $path (printf "%s/" $displayDir) -}}
+    {{- $originalPath = cond (ne $originalDir "") (printf "%s/%s" $originalDir $key) $key -}}
+  {{- else if hasPrefix $path "originals/" -}}
+    {{- $originalPath = $path -}}
+  {{- else if ne $originalDir "" -}}
+    {{- $originalPath = printf "%s/%s" $originalDir $key -}}
+  {{- end -}}
+
+  {{- $displayURL = printf "%s%s" $baseURL (replace $displayPath " " "%20") -}}
+  {{- if $zoom -}}
+    {{- if or (hasPrefix $zoom "https://") (hasPrefix $zoom "http://") -}}
+      {{- $zoomURL = $zoom -}}
+    {{- else -}}
+      {{- $zoomPath := replaceRE `^/+` "" $zoom -}}
+      {{- $zoomURL = printf "%s%s" $baseURL (replace $zoomPath " " "%20") -}}
+    {{- end -}}
+  {{- else -}}
+    {{- $zoomURL = printf "%s%s" $baseURL (replace $originalPath " " "%20") -}}
+  {{- end -}}
+
+  {{- $manifest := partialCached "image_store_manifest.html" "image-store-manifest" -}}
+  {{- with index $manifest $key -}}
+    {{- with index . "display" -}}
+      {{- with index . "width" -}}{{- $width = . -}}{{- end -}}
+      {{- with index . "height" -}}{{- $height = . -}}{{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- return (dict
+  "src" $displayURL
+  "zoom" $zoomURL
+  "key" $key
+  "width" $width
+  "height" $height
+) -}}

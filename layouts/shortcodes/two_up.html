@@ -5,27 +5,37 @@
 {{- end -}}
 {{- $alt1 := .Get "alt1" | default "" -}}
 {{- $alt2 := .Get "alt2" | default "" -}}
-{{- $width1 := .Get "width1" -}}
-{{- $height1 := .Get "height1" -}}
-{{- $width2 := .Get "width2" -}}
-{{- $height2 := .Get "height2" -}}
+{{- $image1 := partial "image_store.html" (dict "src" $src1 "zoom" (.Get "zoom1")) -}}
+{{- $image2 := partial "image_store.html" (dict "src" $src2 "zoom" (.Get "zoom2")) -}}
+{{- $width1 := $image1.width | default (.Get "width1") -}}
+{{- $height1 := $image1.height | default (.Get "height1") -}}
+{{- $width2 := $image2.width | default (.Get "width2") -}}
+{{- $height2 := $image2.height | default (.Get "height2") -}}
+{{- $attrs1 := partial "image_attrs.html" (dict "page" .Page "src" $image1.src "width" $width1 "height" $height1) -}}
+{{- $attrs2 := partial "image_attrs.html" (dict "page" .Page "src" $image2.src "width" $width2 "height" $height2) -}}
 {{- $ratio1 := .Get "ratio1" | default 1 -}}
 {{- $ratio2 := .Get "ratio2" | default 1 -}}
 <div class="two-up" style="--ratio-1: {{ $ratio1 }}; --ratio-2: {{ $ratio2 }};">
   <figure class="two-up__item">
-    <img src="{{ $src1 | safeURL }}"
+    <img src="{{ $image1.src | safeURL }}"
       alt="{{ $alt1 | htmlEscape }}"
-      loading="lazy"
-      {{- with $width1 }} width="{{ . }}"{{ end -}}
-      {{- with $height1 }} height="{{ . }}"{{ end -}}
+      loading="{{ $attrs1.loading }}"
+      decoding="{{ $attrs1.decoding }}"
+      fetchpriority="{{ $attrs1.fetchpriority }}"
+      data-zoom-src="{{ $image1.zoom | safeURL }}"
+      {{- with $attrs1.width }} width="{{ . }}"{{ end -}}
+      {{- with $attrs1.height }} height="{{ . }}"{{ end -}}
     >
   </figure>
   <figure class="two-up__item">
-    <img src="{{ $src2 | safeURL }}"
+    <img src="{{ $image2.src | safeURL }}"
       alt="{{ $alt2 | htmlEscape }}"
-      loading="lazy"
-      {{- with $width2 }} width="{{ . }}"{{ end -}}
-      {{- with $height2 }} height="{{ . }}"{{ end -}}
+      loading="{{ $attrs2.loading }}"
+      decoding="{{ $attrs2.decoding }}"
+      fetchpriority="{{ $attrs2.fetchpriority }}"
+      data-zoom-src="{{ $image2.zoom | safeURL }}"
+      {{- with $attrs2.width }} width="{{ . }}"{{ end -}}
+      {{- with $attrs2.height }} height="{{ . }}"{{ end -}}
     >
   </figure>
 </div>

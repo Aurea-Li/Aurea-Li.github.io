@@ -1,7 +1,13 @@
+{{- if and (eq .Kind "page") (ne .Layout "archives") (ne .Layout "search") -}}
 <script>
 (() => {
   const selector = '.post-content img';
   const ignoredSelector = '.no-lightbox';
+  const content = document.querySelector('.post-content');
+  if (!content || !content.querySelector('img')) {
+    return;
+  }
+
   const overlay = document.createElement('div');
   overlay.className = 'image-lightbox';
   overlay.setAttribute('aria-hidden', 'true');
@@ -98,48 +104,6 @@
     open(img);
   });
 
-  const prefetchFirstPost = () => {
-    const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
-    if (connection && (connection.saveData || /(^(slow-)?3g$)|(^|-)2g/.test(connection.effectiveType || ''))) {
-      return;
-    }
-    const firstLink = document.querySelector('.home .post-list .post-link');
-    if (!firstLink || !firstLink.href) {
-      return;
-    }
-    const href = firstLink.href;
-    const prefetch = document.createElement('link');
-    prefetch.rel = 'prefetch';
-    prefetch.as = 'document';
-    prefetch.href = href;
-    document.head.appendChild(prefetch);
-
-    fetch(href, { credentials: 'same-origin' })
-      .then((response) => response.text())
-      .then((html) => {
-        const doc = new DOMParser().parseFromString(html, 'text/html');
-        const images = Array.from(doc.querySelectorAll('.post-content img')).slice(0, 2);
-        images.forEach((img) => {
-          const src = img.getAttribute('data-zoom-src') || img.getAttribute('src');
-          if (!src) {
-            return;
-          }
-          const url = new URL(src, href).href;
-          const preload = new Image();
-          preload.decoding = 'async';
-          preload.src = url;
-        });
-      })
-      .catch(() => {});
-  };
-
-  window.addEventListener('load', () => {
-    // Prefetch the first post and its images after initial render.
-    if ('requestIdleCallback' in window) {
-      window.requestIdleCallback(prefetchFirstPost, { timeout: 2000 });
-    } else {
-      window.setTimeout(prefetchFirstPost, 2000);
-    }
-  });
 })();
 </script>
+{{- end -}}
