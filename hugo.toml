@@ -17,6 +17,12 @@ theme = "PaperMod"
   hideSummary = true
   hideFooter = true
 
+[params.imageStore]
+  baseURL = "https://raw.githubusercontent.com/Aurea-Li/image-store-2026/main/"
+  displayDir = "display"
+  originalDir = ""
+  manifestURL = "https://raw.githubusercontent.com/Aurea-Li/image-store-2026/main/display/manifest.json"
+
 [params.homeInfoParams]
   Title = ""
   Content = ""

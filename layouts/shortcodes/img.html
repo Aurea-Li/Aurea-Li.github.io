@@ -4,11 +4,14 @@
 {{- end -}}
 {{- $alt := .Get "alt" | default "" -}}
 {{- $title := .Get "title" -}}
+{{- $image := partial "image_store.html" (dict "src" $src "zoom" (.Get "zoom")) -}}
+{{- $width := $image.width | default (.Get "width") -}}
+{{- $height := $image.height | default (.Get "height") -}}
 {{- $attrs := partial "image_attrs.html" (dict
   "page" .Page
-  "src" $src
-  "width" (.Get "width")
-  "height" (.Get "height")
+  "src" $image.src
+  "width" $width
+  "height" $height
   "loading" (.Get "loading")
   "fetchpriority" (.Get "fetchpriority")
   "decoding" (.Get "decoding")
@@ -17,12 +20,13 @@
 {{- with .Get "class" -}}
   {{- $class = printf "%s %s" $class . -}}
 {{- end -}}
-<img src="{{ $src | safeURL }}"
+<img src="{{ $image.src | safeURL }}"
   alt="{{ $alt | htmlEscape }}"
   class="{{ $class }}"
   loading="{{ $attrs.loading }}"
   decoding="{{ $attrs.decoding }}"
   fetchpriority="{{ $attrs.fetchpriority }}"
+  data-zoom-src="{{ $image.zoom | safeURL }}"
   {{- with $attrs.width }} width="{{ . }}"{{ end -}}
   {{- with $attrs.height }} height="{{ . }}"{{ end -}}
   {{- with $title }} title="{{ . | htmlEscape }}"{{ end -}}

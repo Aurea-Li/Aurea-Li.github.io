@@ -1,5 +1,4 @@
 {{- $src := .Destination -}}
-{{- $dest := $src | safeURL -}}
 {{- $alt := .Text | htmlEscape -}}
 {{- $title := .Title -}}
 {{- $attrs := .Attributes -}}
@@ -26,18 +25,22 @@
     {{- $titleAttr = "" -}}
   {{- end -}}
 {{- end -}}
+{{- $image := partial "image_store.html" (dict "src" $src "zoom" $attrs.zoom) -}}
+{{- $width = $image.width | default $width -}}
+{{- $height = $image.height | default $height -}}
 {{- $imageAttrs := partial "image_attrs.html" (dict
   "page" .Page
-  "src" $src
+  "src" $image.src
   "width" $width
   "height" $height
 ) -}}
-<img src="{{ $dest }}"
+<img src="{{ $image.src | safeURL }}"
   alt="{{ $alt }}"
   class="post-image"
   loading="{{ $imageAttrs.loading }}"
   decoding="{{ $imageAttrs.decoding }}"
   fetchpriority="{{ $imageAttrs.fetchpriority }}"
+  data-zoom-src="{{ $image.zoom | safeURL }}"
   {{- with $imageAttrs.width }} width="{{ . }}"{{ end -}}
   {{- with $imageAttrs.height }} height="{{ . }}"{{ end -}}
   {{- with $titleAttr }} title="{{ . | htmlEscape }}"{{ end -}}

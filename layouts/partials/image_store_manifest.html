@@ -1,0 +1,10 @@
+{{- $manifest := dict -}}
+{{- $manifestURL := site.Params.imageStore.manifestURL | default "" -}}
+{{- with $manifestURL -}}
+  {{- with try (resources.GetRemote .) -}}
+    {{- with .Value -}}
+      {{- $manifest = .Content | transform.Unmarshal -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- return $manifest -}}
