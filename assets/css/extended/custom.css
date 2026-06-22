@@ -1,24 +1,5 @@
 :root {
-  --font-heading: "Manrope", "Noto Sans", sans-serif;
-  --font-body: "Manrope", "Noto Sans", sans-serif;
   --image-bleed: clamp(0px, 4vw, 80px);
-}
-
-body {
-  font-family: var(--font-body);
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-.logo a,
-.post-title,
-.post-title a {
-  font-family: var(--font-heading);
-  font-weight: 400;
 }
 
 .post-list {
