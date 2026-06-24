@@ -3,3 +3,4 @@ public/*
 **/.DS_Store
 resources/
 .hugo_cache/
+.hugo_cache_net/

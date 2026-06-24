@@ -3,6 +3,10 @@
   {{- errorf "img shortcode requires src param" -}}
 {{- end -}}
 {{- $alt := .Get "alt" | default "" -}}
+{{- $decorative := eq (printf "%v" (.Get "decorative")) "true" -}}
+{{- if and (not $alt) (not $decorative) -}}
+  {{- errorf "img shortcode requires alt param unless decorative=\"true\": %s" $src -}}
+{{- end -}}
 {{- $title := .Get "title" -}}
 {{- $image := partial "image_store.html" (dict "src" $src "zoom" (.Get "zoom")) -}}
 {{- $width := $image.width | default (.Get "width") -}}

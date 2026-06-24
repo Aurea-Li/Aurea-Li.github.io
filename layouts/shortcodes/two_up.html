@@ -5,6 +5,15 @@
 {{- end -}}
 {{- $alt1 := .Get "alt1" | default "" -}}
 {{- $alt2 := .Get "alt2" | default "" -}}
+{{- $decorativeAll := eq (printf "%v" (.Get "decorative")) "true" -}}
+{{- $decorative1 := or $decorativeAll (eq (printf "%v" (.Get "decorative1")) "true") -}}
+{{- $decorative2 := or $decorativeAll (eq (printf "%v" (.Get "decorative2")) "true") -}}
+{{- if and (not $alt1) (not $decorative1) -}}
+  {{- errorf "two_up shortcode requires alt1 param unless decorative1=\"true\": %s" $src1 -}}
+{{- end -}}
+{{- if and (not $alt2) (not $decorative2) -}}
+  {{- errorf "two_up shortcode requires alt2 param unless decorative2=\"true\": %s" $src2 -}}
+{{- end -}}
 {{- $image1 := partial "image_store.html" (dict "src" $src1 "zoom" (.Get "zoom1")) -}}
 {{- $image2 := partial "image_store.html" (dict "src" $src2 "zoom" (.Get "zoom2")) -}}
 {{- $width1 := $image1.width | default (.Get "width1") -}}

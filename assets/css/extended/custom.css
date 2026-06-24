@@ -146,6 +146,8 @@
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
+  touch-action: none;
+  overscroll-behavior: contain;
   transition: opacity 220ms ease, visibility 0ms linear 220ms;
 }
 
@@ -154,6 +156,10 @@
   visibility: visible;
   pointer-events: auto;
   transition: opacity 220ms ease;
+}
+
+.image-lightbox:focus {
+  outline: none;
 }
 
 @supports ((-webkit-backdrop-filter: blur(2px)) or (backdrop-filter: blur(2px))) {
@@ -174,6 +180,8 @@
   opacity: 0;
   transform: translateY(10px) scale(0.98);
   transition: opacity 240ms ease, transform 240ms ease;
+  user-select: none;
+  -webkit-user-select: none;
   will-change: opacity, transform;
 }
 

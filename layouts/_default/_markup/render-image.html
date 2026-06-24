@@ -2,6 +2,10 @@
 {{- $alt := .Text | htmlEscape -}}
 {{- $title := .Title -}}
 {{- $attrs := .Attributes -}}
+{{- $decorative := eq (printf "%v" $attrs.decorative) "true" -}}
+{{- if and (not $alt) (not $decorative) -}}
+  {{- errorf "Markdown images require alt text unless decorative=\"true\": %s" $src -}}
+{{- end -}}
 {{- $width := "" -}}
 {{- $height := "" -}}
 {{- if $attrs.width -}}
